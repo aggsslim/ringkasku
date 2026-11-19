@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Ringkasku — peringkas teks Bahasa Indonesia offline-first dengan Firebase AI Logic hybrid inference: Gemini Nano di perangkat, Gemini cloud sebagai cadangan."
+    />
+    <title>Ringkasku — Peringkas Teks Hybrid AI</title>
+  </head>
+  <body>
+    <header class="site-header">
+      <h1>Ringkasku</h1>
+      <p class="tagline">
+        Peringkas teks Bahasa Indonesia yang bekerja <strong>di perangkat</strong>
+        (Gemini Nano, offline &amp; privat) dan berpindah ke <strong>cloud</strong>
+        (Gemini) hanya saat diperlukan — ditenagai Firebase AI Logic hybrid inference.
+      </p>
+    </header>
+
+    <main>
+      <div id="config-warning" class="banner banner-warning" hidden>
+        <strong>Konfigurasi Firebase belum diisi.</strong>
+        Salin <code>.env.example</code> menjadi <code>.env</code>, isi nilai
+        <code>VITE_FIREBASE_*</code> dari proyek Firebase Anda, lalu muat ulang
+        halaman ini. Antarmuka tetap bisa dijelajahi, tetapi ringkasan belum
+        dapat dibuat.
+      </div>
+
+      <section class="card">
+        <label class="field-label" for="input-text">Teks yang akan diringkas</label>
+        <textarea
+          id="input-text"
+          rows="10"
+          placeholder="Tempel teks Bahasa Indonesia di sini — artikel berita, catatan kuliah, abstrak jurnal, atau catatan lapangan…"
+        ></textarea>
+        <div class="row row-between">
+          <span id="char-count" class="muted">0 karakter</span>
+          <span id="threshold-info" class="muted"></span>
+        </div>
+
+        <fieldset class="field">
+          <legend class="field-label">Gaya ringkasan</legend>
+          <div class="radio-row" role="radiogroup" aria-label="Gaya ringkasan">
+            <label><input type="radio" name="mode" value="ringkas" checked /> Ringkas <span class="muted">(2–3 kalimat)</span></label>
+            <label><input type="radio" name="mode" value="sedang" /> Sedang <span class="muted">(satu paragraf)</span></label>
+            <label><input type="radio" name="mode" value="poin" /> Poin-poin</label>
+          </div>
+        </fieldset>
+
+        <div class="field">
+          <label class="field-label" for="routing">Mode inferensi (Firebase AI Logic)</label>
+          <select id="routing">
+            <option value="auto" selected>Otomatis — pendek di perangkat, panjang ke cloud</option>
+            <option value="prefer_on_device">Utamakan perangkat (PREFER_ON_DEVICE)</option>
+            <option value="only_on_device">Hanya perangkat (ONLY_ON_DEVICE)</option>
+            <option value="prefer_in_cloud">Utamakan cloud (PREFER_IN_CLOUD)</option>
+            <option value="only_in_cloud">Hanya cloud (ONLY_IN_CLOUD)</option>
+          </select>
+        </div>
+
+        <button id="summarize-btn" class="primary" type="button">Ringkas sekarang</button>
+        <p id="status" class="status" role="status"></p>
+        <div id="error-box" class="banner banner-error" hidden></div>
+      </section>
+
+      <section id="result-card" class="card" hidden>
+        <div class="row row-between">
+          <h2>Hasil ringkasan</h2>
+          <span id="engine-badge" class="badge">—</span>
+        </div>
+        <p id="result-meta" class="muted"></p>
+        <div id="result-text" class="result-text"></div>
+        <div class="row">
+          <button id="copy-btn" type="button">Salin</button>
+          <button id="export-txt" type="button">Unduh .txt</button>
+          <button id="export-md" type="button">Unduh .md</button>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="row row-between">
+          <h2>Riwayat</h2>
+          <button id="clear-history" type="button">Hapus semua</button>
+        </div>
+        <p id="history-empty" class="muted">Belum ada ringkasan. Riwayat tersimpan lokal di peramban ini (localStorage).</p>
+        <ul id="history-list" class="history-list"></ul>
+      </section>
+    </main>
+
+    <footer class="site-footer muted">
+      Ringkasku — entri #BuildHybridAI 2026. Inferensi hibrida via Firebase AI
+      Logic: Gemini Nano di perangkat (Chrome Prompt API) + Gemini cloud.
+    </footer>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
