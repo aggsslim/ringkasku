@@ -31,7 +31,7 @@ The core is `src/summarize.ts`. In short:
    ```ts
    const model = getGenerativeModel(ai, {
      mode: inferenceMode, // e.g. InferenceMode.PREFER_ON_DEVICE
-     inCloudParams: { model: "gemini-2.5-flash-lite" },
+     inCloudParams: { model: "gemini-3.5-flash-lite" }, // gemini-2.5-flash-lite is no longer available to new users
      onDeviceParams: { createOptions: { /* Indonesian/English text I/O */ } },
    });
    await model.initializeDeviceModel(onDownloadProgress); // user-gesture gated

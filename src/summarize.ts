@@ -26,7 +26,7 @@ import {
 } from "firebase/ai";
 
 /** Cloud model used whenever inference runs in the cloud. */
-export const CLOUD_MODEL_NAME = "gemini-2.5-flash-lite";
+export const CLOUD_MODEL_NAME = "gemini-3.5-flash-lite";
 
 /** The three summary styles offered in the UI. */
 export type SummaryMode = "ringkas" | "sedang" | "poin";
