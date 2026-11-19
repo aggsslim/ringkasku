@@ -6,6 +6,8 @@ Paste a long Indonesian text — a news article, lecture notes, a journal abstra
 
 Built for the **#BuildHybridAI 2026** hackathon (Firebase AI Logic), Web/Chrome category.
 
+**Live demo:** https://aggsslim.github.io/ringkasku/ (hosted on GitHub Pages; on-device inference needs Chrome desktop 139+ with Gemini Nano, otherwise summaries route to the cloud).
+
 ## Who it is for
 
 Indonesian students and field researchers often work where the internet is weak or expensive — campus Wi-Fi, rural areas, buses. They still need to digest long Indonesian texts, and sending everything to the cloud costs data, money, and privacy. Ringkasku gives them a summarizer that works with no connection at all when the device supports it, and degrades gracefully to the cloud when it doesn't.
@@ -72,6 +74,7 @@ For production builds, set `VITE_FIREBASE_APPCHECK_SITE_KEY` to your reCAPTCHA E
 ```bash
 npm run build     # type-checks (tsc) and builds to dist/
 npm run preview   # serve the production build locally
+npm run deploy    # build with base /ringkasku/ and publish dist/ to GitHub Pages
 ```
 
 `dist/` is a static site — host it on Firebase Hosting, GitHub Pages, or any static host.
